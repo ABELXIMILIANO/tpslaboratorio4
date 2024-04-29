@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla de Empresas</title>
+</head>
+<body>
+  <table width="50%" align="center" border="1" id="tablaEmpresas">
+    <tr>
+      <td width="50%"><b>EMPRESA</b></td>
+      <td><b>VER PAGINA</b></td>
+    </tr>
+  </table>
+
+  <script>
+    // Función para cargar las empresas desde la API
+    function cargarEmpresas() {
+      fetch('http://localhost:8000/api/v1/empresas')
+        .then(response => response.json())
+        .then(data => {
+          const tabla = document.getElementById('tablaEmpresas'); // obtengo el elemento en el cual quiero interactuar
+          data.forEach(empresa => {
+            const fila = document.createElement('tr');
+            const celdaEmpresa = document.createElement('td');
+            const celdaVerPagina = document.createElement('td');
+            const enlace = document.createElement('a');
+
+            celdaEmpresa.textContent = empresa.denominacion;
+<<<<<<< HEAD
+            enlace.href = `home.html?idEmpresa=${empresa.id}`;
+=======
+            enlace.href = `home.html?id=${empresa.id}`;
+>>>>>>> 17e61e3fff3605df447347fdd77008c7ae63bcbb
+            enlace.textContent = 'URL PAGINA HOME';
+
+            celdaVerPagina.appendChild(enlace);
+            fila.appendChild(celdaEmpresa);
+            fila.appendChild(celdaVerPagina);
+            tabla.appendChild(fila);
+          });
+        })
+        .catch(error => {
+          console.error('Error al cargar las empresas:', error);
+        });
+    }
+
+    // Llamamos a la función para cargar las empresas cuando se cargue la página
+    cargarEmpresas();
+  </script>
+</body>
+</html>
